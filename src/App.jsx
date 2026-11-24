@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { LayoutDashboard, QrCode, ScanLine, Settings } from 'lucide-react';
 import initialData from './data/initialData.json';
 import { createSupabaseFromConfig } from './lib/supabaseClient';
@@ -329,61 +330,81 @@ export default function App() {
       </header>
 
       <nav className="nav-tabs no-print">
-        <button className={`nav-tab ${tab === 'scan' ? 'active' : ''}`} onClick={() => setTab('scan')}>
-          <ScanLine size={17} /> Escáner / Check-in
-        </button>
-        <button className={`nav-tab ${tab === 'dashboard' ? 'active' : ''}`} onClick={() => setTab('dashboard')}>
-          <LayoutDashboard size={17} /> Gente Dentro
-        </button>
-        <button className={`nav-tab ${tab === 'qrcards' ? 'active' : ''}`} onClick={() => setTab('qrcards')}>
-          <QrCode size={17} /> Tarjetas QR
-        </button>
-        <button className={`nav-tab ${tab === 'sync' ? 'active' : ''}`} onClick={() => setTab('sync')}>
-          <Settings size={17} /> Excel / Supabase
-        </button>
+        {[
+          { id: 'scan', label: 'Escáner', Icon: ScanLine },
+          { id: 'dashboard', label: 'Gente Dentro', Icon: LayoutDashboard },
+          { id: 'qrcards', label: 'Tarjetas QR', Icon: QrCode },
+          { id: 'sync', label: 'Ajustes', Icon: Settings },
+        ].map(({ id, label, Icon }) => (
+          <button
+            key={id}
+            className={`nav-tab ${tab === id ? 'active' : ''}`}
+            onClick={() => setTab(id)}
+          >
+            {tab === id && (
+              <motion.span
+                layoutId="nav-pill"
+                className="nav-pill-bg"
+                transition={{ type: 'spring', stiffness: 420, damping: 32 }}
+              />
+            )}
+            <Icon size={18} />
+            <span>{label}</span>
+          </button>
+        ))}
       </nav>
 
-      {tab === 'scan' && (
-        <ScannerCheckin
-          mesas={mesas}
-          movimientos={movimientos}
-          selectedMesaNum={selectedMesaNum}
-          onSelectMesa={setSelectedMesaNum}
-          onRegistrarMovimiento={handleRegistrarMovimiento}
-          onMarkAllMesa={handleMarkAllMesa}
-        />
-      )}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={tab}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ type: 'spring', stiffness: 360, damping: 30 }}
+        >
+          {tab === 'scan' && (
+            <ScannerCheckin
+              mesas={mesas}
+              movimientos={movimientos}
+              selectedMesaNum={selectedMesaNum}
+              onSelectMesa={setSelectedMesaNum}
+              onRegistrarMovimiento={handleRegistrarMovimiento}
+              onMarkAllMesa={handleMarkAllMesa}
+            />
+          )}
 
-      {tab === 'dashboard' && (
-        <DashboardView
-          mesas={mesas}
-          movimientos={movimientos}
-          onOpenMesa={(num) => {
-            setSelectedMesaNum(num);
-            setTab('scan');
-          }}
-          onRegistrarMovimiento={handleRegistrarMovimiento}
-        />
-      )}
+          {tab === 'dashboard' && (
+            <DashboardView
+              mesas={mesas}
+              movimientos={movimientos}
+              onOpenMesa={(num) => {
+                setSelectedMesaNum(num);
+                setTab('scan');
+              }}
+              onRegistrarMovimiento={handleRegistrarMovimiento}
+            />
+          )}
 
-      {tab === 'qrcards' && (
-        <QrCardsView
-          mesas={mesas}
-          eventInfo={eventInfo}
-          onUpdateEventInfo={handleUpdateEventInfo}
-        />
-      )}
+          {tab === 'qrcards' && (
+            <QrCardsView
+              mesas={mesas}
+              eventInfo={eventInfo}
+              onUpdateEventInfo={handleUpdateEventInfo}
+            />
+          )}
 
-      {tab === 'sync' && (
-        <SyncSettingsView
-          mesas={mesas}
-          movimientos={movimientos}
-          supabaseConnected={supabaseConnected}
-          onImportMesas={handleImportMesas}
-          onResetLocal={handleResetLocal}
-          onReconnectSupabase={handleReconnectSupabase}
-        />
-      )}
+          {tab === 'sync' && (
+            <SyncSettingsView
+              mesas={mesas}
+              movimientos={movimientos}
+              supabaseConnected={supabaseConnected}
+              onImportMesas={handleImportMesas}
+              onResetLocal={handleResetLocal}
+              onReconnectSupabase={handleReconnectSupabase}
+            />
+          )}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }
