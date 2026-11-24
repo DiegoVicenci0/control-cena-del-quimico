@@ -1,23 +1,24 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { LayoutDashboard, QrCode, ScanLine, Settings } from 'lucide-react';
+import { LayoutDashboard, Map as MapIcon, QrCode, ScanLine, Settings } from 'lucide-react';
 import initialData from './data/initialData.json';
 import { createSupabaseFromConfig } from './lib/supabaseClient';
 import ScannerCheckin from './components/ScannerCheckin';
 import DashboardView from './components/DashboardView';
+import AcomodoView from './components/AcomodoView';
 import QrCardsView from './components/QrCardsView';
 import SyncSettingsView from './components/SyncSettingsView';
 
-const LS_DATA_KEY = 'cena_quimico_mesas_v1';
+const LS_DATA_KEY = 'cena_quimico_mesas_v2';
 const LS_MOVS_KEY = 'cena_quimico_movimientos_v1';
 const LS_EVENT_KEY = 'cena_quimico_event_v1';
 
 const DEFAULT_EVENT = {
   titulo: 'Cena del Químico 2026',
   subtitulo: 'Facultad de Ciencias Químicas · UdeC',
-  fecha: 'Por confirmar',
+  fecha: 'Viernes, 27 de noviembre de 2026',
   hora: '8:00 PM',
-  lugar: 'Salón del Evento',
+  lugar: 'Pinacoteca Universitaria',
   vestimenta: 'Formal / Etiqueta',
 };
 
@@ -332,8 +333,9 @@ export default function App() {
       <nav className="nav-tabs no-print">
         {[
           { id: 'scan', label: 'Escáner', Icon: ScanLine },
-          { id: 'dashboard', label: 'Gente Dentro', Icon: LayoutDashboard },
-          { id: 'qrcards', label: 'Tarjetas QR', Icon: QrCode },
+          { id: 'plano', label: 'Plano', Icon: MapIcon },
+          { id: 'dashboard', label: 'Dentro', Icon: LayoutDashboard },
+          { id: 'qrcards', label: 'QR', Icon: QrCode },
           { id: 'sync', label: 'Ajustes', Icon: Settings },
         ].map(({ id, label, Icon }) => (
           <button
@@ -370,6 +372,16 @@ export default function App() {
               onSelectMesa={setSelectedMesaNum}
               onRegistrarMovimiento={handleRegistrarMovimiento}
               onMarkAllMesa={handleMarkAllMesa}
+            />
+          )}
+
+          {tab === 'plano' && (
+            <AcomodoView
+              mesas={mesas}
+              onOpenMesa={(num) => {
+                setSelectedMesaNum(num);
+                setTab('scan');
+              }}
             />
           )}
 
