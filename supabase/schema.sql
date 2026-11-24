@@ -35,13 +35,23 @@ CREATE TABLE IF NOT EXISTS public.invitados (
   UNIQUE (mesa_num, nombre)
 );
 
+CREATE TABLE IF NOT EXISTS public.movimientos_acceso (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  mesa_num integer NOT NULL REFERENCES public.mesas(mesa_num) ON DELETE CASCADE,
+  nombre text NOT NULL,
+  tipo text NOT NULL CHECK (tipo IN ('entrada', 'salida', 'reingreso')),
+  registrado_at timestamptz NOT NULL DEFAULT now()
+);
+
 CREATE INDEX IF NOT EXISTS idx_invitados_mesa ON public.invitados(mesa_num);
 CREATE INDEX IF NOT EXISTS idx_invitados_asistio ON public.invitados(asistio);
+CREATE INDEX IF NOT EXISTS idx_movimientos_mesa_nombre ON public.movimientos_acceso(mesa_num, nombre);
+CREATE INDEX IF NOT EXISTS idx_movimientos_fecha ON public.movimientos_acceso(registrado_at DESC);
 
--- Habilitar RLS con acceso para la app web del evento
 ALTER TABLE public.evento_config ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.mesas ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.invitados ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.movimientos_acceso ENABLE ROW LEVEL SECURITY;
 
 DROP POLICY IF EXISTS "Acceso lectura/escritura evento_config" ON public.evento_config;
 CREATE POLICY "Acceso lectura/escritura evento_config" ON public.evento_config
@@ -55,6 +65,10 @@ DROP POLICY IF EXISTS "Acceso lectura/escritura invitados" ON public.invitados;
 CREATE POLICY "Acceso lectura/escritura invitados" ON public.invitados
   FOR ALL USING (true) WITH CHECK (true);
 
--- Habilitar Realtime para ver cuánta gente hay dentro en vivo desde cualquier dispositivo
+DROP POLICY IF EXISTS "Acceso lectura/escritura movimientos_acceso" ON public.movimientos_acceso;
+CREATE POLICY "Acceso lectura/escritura movimientos_acceso" ON public.movimientos_acceso
+  FOR ALL USING (true) WITH CHECK (true);
+
 ALTER PUBLICATION supabase_realtime ADD TABLE public.invitados;
 ALTER PUBLICATION supabase_realtime ADD TABLE public.mesas;
+ALTER PUBLICATION supabase_realtime ADD TABLE public.movimientos_acceso;

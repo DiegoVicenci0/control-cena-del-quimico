@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Html5Qrcode } from 'html5-qrcode';
-import { Camera, CameraOff, Check, CheckCheck, Users, X } from 'lucide-react';
+import { Camera, CameraOff, CheckCheck, Clock, LogIn, LogOut, RotateCw, Users, X } from 'lucide-react';
 
 function extractMesaNum(decodedText) {
   const txt = String(decodedText || '').trim();
@@ -10,6 +10,20 @@ function extractMesaNum(decodedText) {
   if (tagMatch) return parseInt(tagMatch[1], 10);
   if (/^\d+$/.test(txt)) return parseInt(txt, 10);
   return null;
+}
+
+export function formatExactDateTime(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return d.toLocaleString('es-MX', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  });
 }
 
 export function PaymentBadge({ inv }) {
@@ -27,9 +41,10 @@ export function PaymentBadge({ inv }) {
 
 export default function ScannerCheckin({
   mesas,
+  movimientos,
   selectedMesaNum,
   onSelectMesa,
-  onToggleAsistencia,
+  onRegistrarMovimiento,
   onMarkAllMesa,
 }) {
   const [scanning, setScanning] = useState(false);
@@ -38,6 +53,16 @@ export default function ScannerCheckin({
   const scannerRef = useRef(null);
 
   const selectedMesa = mesas.find((m) => m.mesa_num === selectedMesaNum) || null;
+
+  const movsByGuest = useMemo(() => {
+    const map = new Map();
+    for (const mv of movimientos) {
+      const key = `${mv.mesa_num}::${mv.nombre}`;
+      if (!map.has(key)) map.set(key, []);
+      map.get(key).push(mv);
+    }
+    return map;
+  }, [movimientos]);
 
   const stopScanner = async () => {
     if (scannerRef.current) {
@@ -66,7 +91,7 @@ export default function ScannerCheckin({
           const num = extractMesaNum(decodedText);
           if (num && mesas.some((m) => m.mesa_num === num)) {
             onSelectMesa(num);
-            setLastScannedMsg(`QR detectado: Mesa ${num}. Selecciona quién llegó abajo.`);
+            setLastScannedMsg(`QR detectado: Mesa ${num}. Registra entrada, salida o reingreso abajo.`);
             await stopScanner();
           } else {
             setScanError(`QR leído ("${decodedText}"), pero no corresponde a una mesa válida.`);
@@ -97,9 +122,9 @@ export default function ScannerCheckin({
       <div className="card">
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center', justifyContent: 'space-between' }}>
           <div>
-            <h2 style={{ margin: 0, fontSize: '1.05rem' }}>Recepción · Escáner QR de Mesa</h2>
+            <h2 style={{ margin: 0, fontSize: '1.05rem' }}>Recepción · Escáner QR y Control de Acceso</h2>
             <p style={{ margin: '4px 0 0', fontSize: '0.84rem', color: 'var(--muted)' }}>
-              Escanea el QR de la mesa para desplegar a sus invitados y marcar quién llegó antes de registrar su ingreso.
+              Escanea el QR de la mesa para desplegar sus invitados y registrar <strong>Entrada</strong>, <strong>Salida</strong> o <strong>Reingreso</strong> con fecha y hora exacta.
             </p>
           </div>
           <div style={{ display: 'flex', gap: 8 }}>
@@ -127,9 +152,7 @@ export default function ScannerCheckin({
           }}
         />
 
-        {scanError && (
-          <p style={{ color: '#fda4af', fontSize: '0.85rem', marginTop: 10 }}>{scanError}</p>
-        )}
+        {scanError && <p style={{ color: '#fda4af', fontSize: '0.85rem', marginTop: 10 }}>{scanError}</p>}
         {lastScannedMsg && (
           <p style={{ color: '#6ee7b7', fontSize: '0.88rem', marginTop: 10, fontWeight: 600 }}>
             {lastScannedMsg}
@@ -168,16 +191,16 @@ export default function ScannerCheckin({
               <h3 style={{ margin: '2px 0', fontSize: '1.2rem' }}>{selectedMesa.nombre_mesa}</h3>
               <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--muted)' }}>
                 <Users size={14} style={{ verticalAlign: 'middle', marginRight: 4 }} />
-                {mesaArrived} de {selectedMesa.invitados.length} invitados adentro (capacidad {selectedMesa.capacidad})
+                {mesaArrived} de {selectedMesa.invitados.length} invitados dentro ahora (capacidad {selectedMesa.capacidad})
               </p>
             </div>
             <div style={{ display: 'flex', gap: 8 }}>
               <button
                 className="btn btn-green"
-                onClick={() => onMarkAllMesa(selectedMesa.mesa_num, true)}
+                onClick={() => onMarkAllMesa(selectedMesa.mesa_num)}
                 disabled={selectedMesa.invitados.length === 0}
               >
-                <CheckCheck size={16} /> Marcar toda la mesa
+                <CheckCheck size={16} /> Entrada a faltantes
               </button>
               <button className="btn" onClick={() => onSelectMesa(null)}>
                 <X size={16} /> Cerrar
@@ -191,31 +214,66 @@ export default function ScannerCheckin({
             </p>
           ) : (
             <div>
-              {selectedMesa.invitados.map((inv) => (
-                <div
-                  key={`${selectedMesa.mesa_num}-${inv.nombre}`}
-                  className={`guest-row ${inv.asistio ? 'checked' : ''}`}
-                  onClick={() => onToggleAsistencia(selectedMesa.mesa_num, inv.nombre, !inv.asistio)}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                    <div className="check-circle">
-                      {inv.asistio && <Check size={18} strokeWidth={3} />}
-                    </div>
-                    <div>
-                      <div style={{ fontWeight: 700, fontSize: '0.96rem' }}>
-                        #{inv.asiento} · {inv.nombre}
+              {selectedMesa.invitados.map((inv) => {
+                const guestMovs = movsByGuest.get(`${selectedMesa.mesa_num}::${inv.nombre}`) || [];
+                const hasEverEntered = guestMovs.length > 0 || Boolean(inv.hora_llegada);
+                const lastMov = guestMovs[0];
+                const isInside = inv.asistio;
+                const rowClass = isInside ? 'checked' : hasEverEntered ? 'exited' : '';
+
+                return (
+                  <div key={`${selectedMesa.mesa_num}-${inv.nombre}`} className={`guest-row ${rowClass}`} style={{ cursor: 'default' }}>
+                    <div style={{ flex: '1 1 240px' }}>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8 }}>
+                        <span style={{ fontWeight: 700, fontSize: '0.96rem' }}>
+                          #{inv.asiento} · {inv.nombre}
+                        </span>
+                        <PaymentBadge inv={inv} />
+                        {isInside ? (
+                          <span className="badge badge-paid">ADENTRO</span>
+                        ) : hasEverEntered ? (
+                          <span className="badge badge-abono">AFUERA (Salió)</span>
+                        ) : null}
                       </div>
-                      <div style={{ fontSize: '0.78rem', color: 'var(--muted)', marginTop: 2 }}>
-                        {inv.asistio
-                          ? `Ingresó ${inv.hora_llegada ? new Date(inv.hora_llegada).toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }) : 'ahora'}`
-                          : 'Toca para registrar llegada'}
+                      <div style={{ fontSize: '0.78rem', color: 'var(--muted)', marginTop: 4 }}>
+                        <Clock size={12} style={{ verticalAlign: 'middle', marginRight: 4 }} />
+                        {lastMov
+                          ? `Último registro: ${lastMov.tipo.toUpperCase()} · ${formatExactDateTime(lastMov.registrado_at)}`
+                          : inv.hora_llegada
+                            ? `Entrada: ${formatExactDateTime(inv.hora_llegada)}`
+                            : 'Sin registro de ingreso aún'}
+                        {guestMovs.length > 1 ? ` (${guestMovs.length} movs.)` : ''}
                         {inv.nota ? ` · Nota: ${inv.nota}` : ''}
                       </div>
                     </div>
+
+                    <div className="guest-actions">
+                      {isInside ? (
+                        <button
+                          className="btn btn-sm btn-danger"
+                          onClick={() => onRegistrarMovimiento(selectedMesa.mesa_num, inv.nombre, 'salida')}
+                        >
+                          <LogOut size={15} /> Registrar Salida
+                        </button>
+                      ) : hasEverEntered ? (
+                        <button
+                          className="btn btn-sm btn-primary"
+                          onClick={() => onRegistrarMovimiento(selectedMesa.mesa_num, inv.nombre, 'reingreso')}
+                        >
+                          <RotateCw size={15} /> Registrar Reingreso
+                        </button>
+                      ) : (
+                        <button
+                          className="btn btn-sm btn-green"
+                          onClick={() => onRegistrarMovimiento(selectedMesa.mesa_num, inv.nombre, 'entrada')}
+                        >
+                          <LogIn size={15} /> Registrar Entrada
+                        </button>
+                      )}
+                    </div>
                   </div>
-                  <PaymentBadge inv={inv} />
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>

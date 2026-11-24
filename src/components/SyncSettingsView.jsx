@@ -5,6 +5,7 @@ import { clearSupabaseConfig, getSupabaseConfig, saveSupabaseConfig } from '../l
 
 export default function SyncSettingsView({
   mesas,
+  movimientos,
   supabaseConnected,
   onImportMesas,
   onResetLocal,
@@ -63,8 +64,8 @@ export default function SyncSettingsView({
             <FileSpreadsheet size={16} /> Cargar / Actualizar desde Excel
             <input type="file" accept=".xlsx,.xls" onChange={handleExcelUpload} style={{ display: 'none' }} />
           </label>
-          <button className="btn btn-green" onClick={() => exportAsistenciaExcel(mesas)}>
-            <Download size={16} /> Descargar Asistencia en Excel
+          <button className="btn btn-green" onClick={() => exportAsistenciaExcel(mesas, movimientos)}>
+            <Download size={16} /> Descargar Asistencia y Bitácora (Excel)
           </button>
           <button className="btn" onClick={onResetLocal}>
             <RotateCcw size={16} /> Restaurar respaldo inicial

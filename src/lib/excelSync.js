@@ -19,7 +19,7 @@ export async function parseCenaExcel(file) {
     const colJ = row[9];
 
     if (typeof colB === 'string' && colB.trim().startsWith('Mesa ')) {
-      const num = parseInt(colB.trim().replace('Mesa ', '').trim(), 10);
+      const num = parseInt(colB.trim().replace('Mesa ', '').strip ? colB.trim().replace('Mesa ', '').trim() : colB.trim().replace('Mesa ', ''), 10);
       if (!Number.isNaN(num)) {
         cur = {
           mesa_num: num,
@@ -63,13 +63,58 @@ export async function parseCenaExcel(file) {
   return mesas;
 }
 
-export function exportAsistenciaExcel(mesas) {
+function formatDateTime(iso) {
+  if (!iso) return { fecha: '', hora: '' };
+  const d = new Date(iso);
+  return {
+    fecha: d.toLocaleDateString('es-MX', { year: 'numeric', month: '2-digit', day: '2-digit' }),
+    hora: d.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }),
+  };
+}
+
+export function exportAsistenciaExcel(mesas, movimientos = []) {
+  const movByGuest = new Map();
+  for (const mv of movimientos) {
+    const key = `${mv.mesa_num}::${mv.nombre}`;
+    if (!movByGuest.has(key)) movByGuest.set(key, []);
+    movByGuest.get(key).push(mv);
+  }
+
   const data = [
-    ['Mesa', 'Nombre Mesa', 'Asiento', 'Invitado', 'Pago ($)', 'Estado Pago', 'Asistió', 'Hora Llegada', 'Nota'],
+    [
+      'Mesa',
+      'Nombre Mesa',
+      'Asiento',
+      'Invitado',
+      'Pago ($)',
+      'Estado Pago',
+      'Estado Actual',
+      '1ra Entrada',
+      'Última Salida',
+      'Último Reingreso',
+      'Total Movimientos',
+      'Nota',
+    ],
   ];
 
   for (const m of mesas) {
     for (const inv of m.invitados) {
+      const list = movByGuest.get(`${m.mesa_num}::${inv.nombre}`) || [];
+      const sorted = [...list].sort((a, b) => new Date(a.registrado_at) - new Date(b.registrado_at));
+      const firstIn = sorted.find((x) => x.tipo === 'entrada');
+      const lastOut = [...sorted].reverse().find((x) => x.tipo === 'salida');
+      const lastRe = [...sorted].reverse().find((x) => x.tipo === 'reingreso');
+
+      const estadoActual = inv.asistio
+        ? 'ADENTRO'
+        : sorted.length > 0
+          ? 'AFUERA (Salió)'
+          : 'SIN LLEGAR';
+
+      const f1 = firstIn ? formatDateTime(firstIn.registrado_at) : formatDateTime(inv.hora_llegada);
+      const fOut = lastOut ? formatDateTime(lastOut.registrado_at) : { fecha: '', hora: '' };
+      const fRe = lastRe ? formatDateTime(lastRe.registrado_at) : { fecha: '', hora: '' };
+
       data.push([
         m.mesa_num,
         m.nombre_mesa,
@@ -77,26 +122,42 @@ export function exportAsistenciaExcel(mesas) {
         inv.nombre,
         inv.pago_monto,
         inv.pago_estado,
-        inv.asistio ? 'SÍ' : 'NO',
-        inv.hora_llegada ? new Date(inv.hora_llegada).toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }) : '',
+        estadoActual,
+        f1.fecha ? `${f1.fecha} ${f1.hora}` : '',
+        fOut.fecha ? `${fOut.fecha} ${fOut.hora}` : '',
+        fRe.fecha ? `${fRe.fecha} ${fRe.hora}` : '',
+        sorted.length,
         inv.nota || '',
       ]);
     }
   }
 
-  const ws = XLSX.utils.aoa_to_sheet(data);
-  ws['!cols'] = [
-    { wch: 8 },
-    { wch: 28 },
-    { wch: 9 },
-    { wch: 36 },
-    { wch: 10 },
-    { wch: 14 },
-    { wch: 10 },
-    { wch: 14 },
-    { wch: 16 },
-  ];
+  const logRows = [['Fecha', 'Hora Precisa', 'Tipo Movimiento', 'Mesa', 'Nombre Mesa', 'Invitado']];
+  const mesaMap = new Map(mesas.map((m) => [m.mesa_num, m.nombre_mesa]));
+  const sortedAll = [...movimientos].sort((a, b) => new Date(b.registrado_at) - new Date(a.registrado_at));
+  for (const mv of sortedAll) {
+    const dt = formatDateTime(mv.registrado_at);
+    logRows.push([
+      dt.fecha,
+      dt.hora,
+      mv.tipo.toUpperCase(),
+      mv.mesa_num,
+      mesaMap.get(mv.mesa_num) || '',
+      mv.nombre,
+    ]);
+  }
+
   const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Asistencia');
+  const ws1 = XLSX.utils.aoa_to_sheet(data);
+  ws1['!cols'] = [
+    { wch: 7 }, { wch: 26 }, { wch: 8 }, { wch: 34 }, { wch: 10 }, { wch: 13 },
+    { wch: 16 }, { wch: 20 }, { wch: 20 }, { wch: 20 }, { wch: 16 }, { wch: 16 },
+  ];
+  XLSX.utils.book_append_sheet(wb, ws1, 'Asistencia');
+
+  const ws2 = XLSX.utils.aoa_to_sheet(logRows);
+  ws2['!cols'] = [{ wch: 12 }, { wch: 14 }, { wch: 16 }, { wch: 8 }, { wch: 26 }, { wch: 34 }];
+  XLSX.utils.book_append_sheet(wb, ws2, 'Bitacora Accesos');
+
   XLSX.writeFile(wb, `Asistencia_Cena_Quimico_${new Date().toISOString().slice(0, 10)}.xlsx`);
 }

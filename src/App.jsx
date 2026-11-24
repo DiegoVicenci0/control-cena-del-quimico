@@ -8,6 +8,7 @@ import QrCardsView from './components/QrCardsView';
 import SyncSettingsView from './components/SyncSettingsView';
 
 const LS_DATA_KEY = 'cena_quimico_mesas_v1';
+const LS_MOVS_KEY = 'cena_quimico_movimientos_v1';
 const LS_EVENT_KEY = 'cena_quimico_event_v1';
 
 const DEFAULT_EVENT = {
@@ -24,9 +25,19 @@ function loadLocalMesas() {
     const raw = window.localStorage.getItem(LS_DATA_KEY);
     if (raw) return JSON.parse(raw);
   } catch {
-    // ignore parse error
+    // ignore
   }
   return initialData;
+}
+
+function loadLocalMovs() {
+  try {
+    const raw = window.localStorage.getItem(LS_MOVS_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch {
+    // ignore
+  }
+  return [];
 }
 
 function loadLocalEvent() {
@@ -40,14 +51,14 @@ function loadLocalEvent() {
 }
 
 export default function App() {
-  const [tab, setTab] = useState('scan'); // scan | dashboard | qrcards | sync
+  const [tab, setTab] = useState('scan');
   const [mesas, setMesas] = useState(loadLocalMesas);
+  const [movimientos, setMovimientos] = useState(loadLocalMovs);
   const [eventInfo, setEventInfo] = useState(loadLocalEvent);
   const [selectedMesaNum, setSelectedMesaNum] = useState(null);
   const [supabase, setSupabase] = useState(() => createSupabaseFromConfig());
   const [supabaseConnected, setSupabaseConnected] = useState(false);
 
-  // Detect ?mesa=N in URL when opening a QR link
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const mesaParam = params.get('mesa');
@@ -60,10 +71,13 @@ export default function App() {
     }
   }, []);
 
-  // Persist locally as offline/backup cache
   useEffect(() => {
     window.localStorage.setItem(LS_DATA_KEY, JSON.stringify(mesas));
   }, [mesas]);
+
+  useEffect(() => {
+    window.localStorage.setItem(LS_MOVS_KEY, JSON.stringify(movimientos));
+  }, [movimientos]);
 
   useEffect(() => {
     window.localStorage.setItem(LS_EVENT_KEY, JSON.stringify(eventInfo));
@@ -75,12 +89,17 @@ export default function App() {
       return;
     }
     try {
-      const [{ data: mData, error: mErr }, { data: iData, error: iErr }, { data: cfgData }] =
-        await Promise.all([
-          client.from('mesas').select('*').order('mesa_num', { ascending: true }),
-          client.from('invitados').select('*').order('asiento', { ascending: true }),
-          client.from('evento_config').select('*').eq('id', 1).maybeSingle(),
-        ]);
+      const [
+        { data: mData, error: mErr },
+        { data: iData, error: iErr },
+        { data: cfgData },
+        { data: movData },
+      ] = await Promise.all([
+        client.from('mesas').select('*').order('mesa_num', { ascending: true }),
+        client.from('invitados').select('*').order('asiento', { ascending: true }),
+        client.from('evento_config').select('*').eq('id', 1).maybeSingle(),
+        client.from('movimientos_acceso').select('*').order('registrado_at', { ascending: false }).limit(500),
+      ]);
 
       if (mErr || iErr) {
         setSupabaseConnected(false);
@@ -88,6 +107,8 @@ export default function App() {
       }
 
       setSupabaseConnected(true);
+      if (movData) setMovimientos(movData);
+
       if (cfgData) {
         setEventInfo((prev) => ({
           ...prev,
@@ -137,6 +158,9 @@ export default function App() {
       .on('postgres_changes', { event: '*', schema: 'public', table: 'invitados' }, () => {
         fetchFromSupabase(supabase);
       })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'movimientos_acceso' }, () => {
+        fetchFromSupabase(supabase);
+      })
       .subscribe();
 
     return () => {
@@ -144,8 +168,20 @@ export default function App() {
     };
   }, [supabase, fetchFromSupabase]);
 
-  const handleToggleAsistencia = async (mesaNum, nombre, nextVal) => {
-    const timestamp = nextVal ? new Date().toISOString() : null;
+  const handleRegistrarMovimiento = async (mesaNum, nombre, tipo) => {
+    const nowIso = new Date().toISOString();
+    const isInside = tipo === 'entrada' || tipo === 'reingreso';
+
+    const newMov = {
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      mesa_num: mesaNum,
+      nombre,
+      tipo,
+      registrado_at: nowIso,
+    };
+
+    setMovimientos((prev) => [newMov, ...prev]);
+
     setMesas((prev) =>
       prev.map((m) =>
         m.mesa_num !== mesaNum
@@ -153,48 +189,51 @@ export default function App() {
           : {
               ...m,
               invitados: m.invitados.map((inv) =>
-                inv.nombre === nombre ? { ...inv, asistio: nextVal, hora_llegada: timestamp } : inv
+                inv.nombre === nombre
+                  ? {
+                      ...inv,
+                      asistio: isInside,
+                      hora_llegada: inv.hora_llegada || (isInside ? nowIso : null),
+                    }
+                  : inv
               ),
             }
       )
     );
 
     if (supabase && supabaseConnected) {
-      await supabase
-        .from('invitados')
-        .update({ asistio: nextVal, hora_llegada: timestamp, updated_at: new Date().toISOString() })
-        .eq('mesa_num', mesaNum)
-        .eq('nombre', nombre);
+      await Promise.all([
+        supabase.from('movimientos_acceso').insert({
+          mesa_num: mesaNum,
+          nombre,
+          tipo,
+          registrado_at: nowIso,
+        }),
+        supabase
+          .from('invitados')
+          .update({
+            asistio: isInside,
+            hora_llegada: isInside ? nowIso : undefined,
+            updated_at: nowIso,
+          })
+          .eq('mesa_num', mesaNum)
+          .eq('nombre', nombre),
+      ]);
     }
   };
 
-  const handleMarkAllMesa = async (mesaNum, nextVal) => {
-    const timestamp = nextVal ? new Date().toISOString() : null;
-    setMesas((prev) =>
-      prev.map((m) =>
-        m.mesa_num !== mesaNum
-          ? m
-          : {
-              ...m,
-              invitados: m.invitados.map((inv) => ({
-                ...inv,
-                asistio: nextVal,
-                hora_llegada: timestamp,
-              })),
-            }
-      )
-    );
-
-    if (supabase && supabaseConnected) {
-      await supabase
-        .from('invitados')
-        .update({ asistio: nextVal, hora_llegada: timestamp, updated_at: new Date().toISOString() })
-        .eq('mesa_num', mesaNum);
+  const handleMarkAllMesa = async (mesaNum) => {
+    const mesa = mesas.find((m) => m.mesa_num === mesaNum);
+    if (!mesa) return;
+    for (const inv of mesa.invitados) {
+      if (!inv.asistio) {
+        const hasMov = movimientos.some((mv) => mv.mesa_num === mesaNum && mv.nombre === inv.nombre);
+        await handleRegistrarMovimiento(mesaNum, inv.nombre, hasMov || inv.hora_llegada ? 'reingreso' : 'entrada');
+      }
     }
   };
 
   const handleImportMesas = async (parsedMesas) => {
-    // Preserve existing check-in status by (mesa_num + nombre)
     const existingMap = new Map();
     for (const m of mesas) {
       for (const inv of m.invitados) {
@@ -255,6 +294,7 @@ export default function App() {
 
   const handleResetLocal = () => {
     setMesas(initialData);
+    setMovimientos([]);
   };
 
   const handleReconnectSupabase = () => {
@@ -306,9 +346,10 @@ export default function App() {
       {tab === 'scan' && (
         <ScannerCheckin
           mesas={mesas}
+          movimientos={movimientos}
           selectedMesaNum={selectedMesaNum}
           onSelectMesa={setSelectedMesaNum}
-          onToggleAsistencia={handleToggleAsistencia}
+          onRegistrarMovimiento={handleRegistrarMovimiento}
           onMarkAllMesa={handleMarkAllMesa}
         />
       )}
@@ -316,11 +357,12 @@ export default function App() {
       {tab === 'dashboard' && (
         <DashboardView
           mesas={mesas}
+          movimientos={movimientos}
           onOpenMesa={(num) => {
             setSelectedMesaNum(num);
             setTab('scan');
           }}
-          onToggleAsistencia={handleToggleAsistencia}
+          onRegistrarMovimiento={handleRegistrarMovimiento}
         />
       )}
 
@@ -335,6 +377,7 @@ export default function App() {
       {tab === 'sync' && (
         <SyncSettingsView
           mesas={mesas}
+          movimientos={movimientos}
           supabaseConnected={supabaseConnected}
           onImportMesas={handleImportMesas}
           onResetLocal={handleResetLocal}
