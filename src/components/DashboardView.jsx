@@ -174,7 +174,6 @@ export default function DashboardView({ mesas, movimientos, onOpenMesa, onRegist
                   <div style={{ flex: '1 1 220px' }}>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
                       <strong>{inv.nombre}</strong>
-                      <PaymentBadge inv={inv} />
                     </div>
                     <div style={{ fontSize: '0.78rem', color: 'var(--muted)', marginTop: 3 }}>
                       Mesa {mesa.mesa_num} · {mesa.nombre_mesa} (Asiento {inv.asiento})

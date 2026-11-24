@@ -228,7 +228,6 @@ export default function ScannerCheckin({
                         <span style={{ fontWeight: 700, fontSize: '0.96rem' }}>
                           #{inv.asiento} · {inv.nombre}
                         </span>
-                        <PaymentBadge inv={inv} />
                         {isInside ? (
                           <span className="badge badge-paid">ADENTRO</span>
                         ) : hasEverEntered ? (
