@@ -29,7 +29,9 @@ function QrCard({ mesa, eventInfo, baseUrl }) {
       <div className="ev-sub">{eventInfo.subtitulo}</div>
 
       <div className="mesa-badge">MESA {mesa.mesa_num}</div>
-      <div className="mesa-subname">{mesa.nombre_mesa}</div>
+      {mesa.nombre_mesa && mesa.nombre_mesa.toUpperCase() !== `MESA ${mesa.mesa_num}` && (
+        <div className="mesa-subname">{mesa.nombre_mesa}</div>
+      )}
 
       <div className="qr-box">
         {dataUrl && <img src={dataUrl} alt={`QR Mesa ${mesa.mesa_num}`} style={{ width: 170, height: 170, display: 'block' }} />}
@@ -68,7 +70,7 @@ export default function QrCardsView({ mesas, eventInfo, onUpdateEventInfo }) {
             </p>
           </div>
           <button className="btn btn-primary" onClick={() => window.print()}>
-            <Printer size={16} /> Imprimir / Guardar PDF (15 tarjetas)
+            <Printer size={16} /> Imprimir / Guardar PDF ({mesas.length} tarjetas)
           </button>
         </div>
 
