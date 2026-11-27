@@ -103,6 +103,42 @@ function shortLabel(str) {
   return str.length > 14 ? `${str.slice(0, 13).trim()}…` : str;
 }
 
+function getChairCoords(x, y, cap, isSquare) {
+  if (!isSquare) {
+    return Array.from({ length: cap }, (_, i) => {
+      const angle = (Math.PI * 2 * i) / cap - Math.PI / 2;
+      return { cx: x + Math.cos(angle) * 40, cy: y + Math.sin(angle) * 40 };
+    });
+  }
+  // Distribute chairs neatly around the 4 sides of the square (3 per side for 12, or balanced)
+  const perSide = [0, 0, 0, 0];
+  for (let i = 0; i < cap; i += 1) perSide[i % 4] += 1;
+  const coords = [];
+  const offset = 37;
+  const span = 40;
+  // Top (left to right)
+  for (let i = 0; i < perSide[0]; i += 1) {
+    const t = perSide[0] === 1 ? 0 : -span / 2 + (span * i) / (perSide[0] - 1);
+    coords.push({ cx: x + t, cy: y - offset });
+  }
+  // Right (top to bottom)
+  for (let i = 0; i < perSide[1]; i += 1) {
+    const t = perSide[1] === 1 ? 0 : -span / 2 + (span * i) / (perSide[1] - 1);
+    coords.push({ cx: x + offset, cy: y + t });
+  }
+  // Bottom (right to left)
+  for (let i = 0; i < perSide[2]; i += 1) {
+    const t = perSide[2] === 1 ? 0 : span / 2 - (span * i) / (perSide[2] - 1);
+    coords.push({ cx: x + t, cy: y + offset });
+  }
+  // Left (bottom to top)
+  for (let i = 0; i < perSide[3]; i += 1) {
+    const t = perSide[3] === 1 ? 0 : span / 2 - (span * i) / (perSide[3] - 1);
+    coords.push({ cx: x - offset, cy: y + t });
+  }
+  return coords;
+}
+
 export default function AcomodoView({ mesas, onOpenMesa }) {
   const [assignment, setAssignment] = useState(loadSavedLayout);
   const [selectedMesaNum, setSelectedMesaNum] = useState(5);
@@ -362,7 +398,8 @@ export default function AcomodoView({ mesas, onOpenMesa }) {
             <span><i style={{ background: GROUP_COLORS.daniela }} /> Daniela (7–10)</span>
             <span><i style={{ background: GROUP_COLORS.alonso }} /> Alonso + Armando</span>
             <span><i style={{ background: GROUP_COLORS.m1 }} /> Mesa 1</span>
-            <span><i style={{ background: GROUP_COLORS.other }} /> Leislani / Presi</span>
+            <span><i style={{ background: GROUP_COLORS.other }} /> Otras</span>
+            <span>■ Cuadrada (11–12) · ● Redonda (10)</span>
           </div>
 
           <div className="plano-svg-wrap">
@@ -433,6 +470,8 @@ export default function AcomodoView({ mesas, onOpenMesa }) {
                 const color = GROUP_COLORS[meta.group] || '#5856d6';
                 const cap = Math.max(m.capacidad || 0, m.invitados.length, 10);
                 const occupied = m.invitados.length;
+                const isSquare = cap >= 11 || mesaNum === 6;
+                const chairCoords = getChairCoords(slot.x, slot.y, cap, isSquare);
                 const matched = mesaMatches(m);
                 const isSelected = mesaNum === selectedMesa.mesa_num;
                 const isSwapFirst = swapFirstSlot === slot.id;
@@ -450,23 +489,33 @@ export default function AcomodoView({ mesas, onOpenMesa }) {
                     opacity={matched ? 1 : 0.22}
                     onClick={() => handleTableClick(slot.id, mesaNum)}
                   >
-                    {(isSelected || isSwapFirst) && (
-                      <circle
-                        cx={slot.x}
-                        cy={slot.y}
-                        r="47"
-                        fill="none"
-                        stroke={isSwapFirst ? '#ff9500' : '#007aff'}
-                        strokeWidth="2.4"
-                        strokeDasharray={isSwapFirst ? '5 3' : undefined}
-                      />
-                    )}
+                    {(isSelected || isSwapFirst) &&
+                      (isSquare ? (
+                        <rect
+                          x={slot.x - 45}
+                          y={slot.y - 45}
+                          width="90"
+                          height="90"
+                          rx="18"
+                          fill="none"
+                          stroke={isSwapFirst ? '#ff9500' : '#007aff'}
+                          strokeWidth="2.4"
+                          strokeDasharray={isSwapFirst ? '5 3' : undefined}
+                        />
+                      ) : (
+                        <circle
+                          cx={slot.x}
+                          cy={slot.y}
+                          r="47"
+                          fill="none"
+                          stroke={isSwapFirst ? '#ff9500' : '#007aff'}
+                          strokeWidth="2.4"
+                          strokeDasharray={isSwapFirst ? '5 3' : undefined}
+                        />
+                      ))}
 
-                    {Array.from({ length: cap }, (_, i) => {
+                    {chairCoords.map(({ cx, cy }, i) => {
                       const inv = m.invitados[i];
-                      const angle = (Math.PI * 2 * i) / cap - Math.PI / 2;
-                      const cx = slot.x + Math.cos(angle) * 40;
-                      const cy = slot.y + Math.sin(angle) * 40;
                       const isEmpty = !inv;
                       const isVeg = inv && (inv.nota || '').toLowerCase().includes('vegetar');
                       const isInside = inv && inv.asistio;
@@ -482,7 +531,7 @@ export default function AcomodoView({ mesas, onOpenMesa }) {
                           key={i}
                           cx={cx}
                           cy={cy}
-                          r="4.3"
+                          r="4.2"
                           fill={fill}
                           stroke={isInside ? '#15803d' : color}
                           strokeWidth="1.3"
@@ -491,15 +540,29 @@ export default function AcomodoView({ mesas, onOpenMesa }) {
                       );
                     })}
 
-                    <circle
-                      cx={slot.x}
-                      cy={slot.y}
-                      r="30"
-                      fill="#ffffff"
-                      stroke={color}
-                      strokeWidth="2.8"
-                      strokeDasharray={isUnassigned ? '4 3' : undefined}
-                    />
+                    {isSquare ? (
+                      <rect
+                        x={slot.x - 29}
+                        y={slot.y - 29}
+                        width="58"
+                        height="58"
+                        rx="10"
+                        fill="#ffffff"
+                        stroke={color}
+                        strokeWidth="2.8"
+                        strokeDasharray={isUnassigned ? '4 3' : undefined}
+                      />
+                    ) : (
+                      <circle
+                        cx={slot.x}
+                        cy={slot.y}
+                        r="30"
+                        fill="#ffffff"
+                        stroke={color}
+                        strokeWidth="2.8"
+                        strokeDasharray={isUnassigned ? '4 3' : undefined}
+                      />
+                    )}
                     <text
                       x={slot.x}
                       y={slot.y - 5}
@@ -588,12 +651,16 @@ export default function AcomodoView({ mesas, onOpenMesa }) {
                   : `Mesa ${selectedMesa.mesa_num} · ${selectedMesa.nombre_mesa}`}
               </h2>
               <p style={{ margin: '3px 0 0', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                {(selectedMesa.capacidad || selectedMesa.invitados.length) >= 11 || selectedMesa.mesa_num === 6
+                  ? 'Mesa cuadrada'
+                  : 'Mesa redonda'}{' '}
+                ·{' '}
                 {selectedSlot?.zone === 'left'
                   ? 'Brazo izquierdo'
                   : selectedSlot?.zone === 'right'
                     ? 'Brazo derecho'
                     : 'Frente (parte inferior)'}{' '}
-                · Posición {selectedSlot?.id}
+                · {selectedSlot?.id}
               </p>
             </div>
             <span className="badge badge-paid" style={{ background: 'var(--blue-soft)', color: 'var(--blue)' }}>
