@@ -398,7 +398,7 @@
   {
     "mesa_num": 5,
     "nombre_mesa": "MESA 5",
-    "capacidad": 11,
+    "capacidad": 12,
     "invitados": [
       {
         "asiento": 1,
@@ -1055,7 +1055,7 @@
   {
     "mesa_num": 12,
     "nombre_mesa": "MESA 12",
-    "capacidad": 10,
+    "capacidad": 12,
     "invitados": [
       {
         "asiento": 1,
@@ -1126,6 +1126,30 @@
         "nombre": "ADAI MORALES",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 10,
+        "nombre": "VALE DE LA MORA",
+        "pago_monto": 0.0,
+        "pago_estado": "credito",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 11,
+        "nombre": "ISAAC ZARATE",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 12,
+        "nombre": "ALAN AMIGO DEL PRESI",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
         "nota": null,
         "asistio": false
       }

@@ -1,4 +1,4 @@
--- Seed generado automáticamente desde Cena del quimico acomodo.xlsx (2026-11-27)
+-- Seed generado automáticamente desde Cena del quimico acomodo.xlsx (2026-11-27 00:28)
 TRUNCATE TABLE public.invitados, public.mesas RESTART IDENTITY CASCADE;
 
 INSERT INTO public.mesas (mesa_num, nombre_mesa, capacidad) VALUES
@@ -6,14 +6,14 @@ INSERT INTO public.mesas (mesa_num, nombre_mesa, capacidad) VALUES
   (2, 'MESA 2', 12),
   (3, 'MESA 3', 10),
   (4, 'MESA 4', 12),
-  (5, 'MESA 5', 11),
+  (5, 'MESA 5', 12),
   (6, 'MESA 6', 12),
   (7, 'MESA 7', 10),
   (8, 'MESA 8', 10),
   (9, 'MESA 9', 10),
   (10, 'MESA 10', 12),
   (11, 'MESA 11', 12),
-  (12, 'MESA 12', 10),
+  (12, 'MESA 12', 12),
   (13, 'MESA 13', 12),
   (14, 'DR ARMANDO', 12);
 
@@ -149,6 +149,9 @@ INSERT INTO public.invitados (mesa_num, asiento, nombre, pago_monto, pago_estado
   (12, 7, 'RICARDO GARCIA', 700.0, 'pagado', NULL, false),
   (12, 8, 'ADRIAN DIAZ', 700.0, 'pagado', NULL, false),
   (12, 9, 'ADAI MORALES', 700.0, 'pagado', NULL, false),
+  (12, 10, 'VALE DE LA MORA', 0.0, 'credito', NULL, false),
+  (12, 11, 'ISAAC ZARATE', 0.0, 'pendiente', NULL, false),
+  (12, 12, 'ALAN AMIGO DEL PRESI', 0.0, 'pendiente', NULL, false),
   (13, 1, 'OSCAR VAZQUEZ', 700.0, 'pagado', NULL, false),
   (13, 2, 'ELIZABETH', 700.0, 'pagado', NULL, false),
   (13, 3, 'MEJIA PEDRAZA ESTRELLA', 700.0, 'pagado', NULL, false),
