@@ -1,5 +1,20 @@
 import * as XLSX from 'xlsx';
 
+const QR_TAG_RE = /\s*\((?:presi|grecia)\)\s*/gi;
+
+function cleanPersonName(val) {
+  return String(val || '')
+    .replace(QR_TAG_RE, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function cleanMesaName(val, num) {
+  const cleaned = cleanPersonName(val);
+  if (!cleaned) return `MESA ${num}`;
+  return cleaned.replace(/^MESA(\d+)$/i, 'MESA $1');
+}
+
 export async function parseCenaExcel(file) {
   const buffer = await file.arrayBuffer();
   const wb = XLSX.read(buffer, { type: 'array' });
@@ -16,14 +31,14 @@ export async function parseCenaExcel(file) {
     const colB = row[1];
     const colC = row[2];
     const colI = row[8];
-    const colJ = row[9];
+    const colK = row[10];
 
     if (typeof colB === 'string' && colB.trim().startsWith('Mesa ')) {
-      const num = parseInt(colB.trim().replace('Mesa ', '').strip ? colB.trim().replace('Mesa ', '').trim() : colB.trim().replace('Mesa ', ''), 10);
+      const num = parseInt(colB.trim().replace('Mesa ', '').trim(), 10);
       if (!Number.isNaN(num)) {
         cur = {
           mesa_num: num,
-          nombre_mesa: String(colC || '').trim() || `Mesa ${num}`,
+          nombre_mesa: cleanMesaName(colC, num),
           capacidad: 0,
           invitados: [],
         };
@@ -37,6 +52,7 @@ export async function parseCenaExcel(file) {
       const rawName = colB === null || colB === undefined ? '' : String(colB).trim();
       if (!rawName || rawName.toUpperCase() === 'SIN LLENAR') continue;
 
+      const nombre = cleanPersonName(rawName);
       let pagoMonto = 0;
       let pagoEstado = 'pendiente';
       if (typeof colI === 'number' && !Number.isNaN(colI)) {
@@ -46,15 +62,16 @@ export async function parseCenaExcel(file) {
         pagoEstado = colI.trim().toLowerCase();
       }
 
-      const isFirstRow = cur.invitados.length === 0;
-      const nota = !isFirstRow && colJ !== null && colJ !== undefined ? String(colJ).trim() : null;
+      const notes = [];
+      if (typeof colK === 'string' && /vegetar/i.test(colK)) notes.push('Vegetariana');
+      if (pagoEstado === 'premio') notes.push('Premio');
 
       cur.invitados.push({
         asiento: Math.round(colA),
-        nombre: rawName,
+        nombre,
         pago_monto: pagoMonto,
         pago_estado: pagoEstado,
-        nota,
+        nota: notes.length ? notes.join(' · ') : null,
         asistio: false,
       });
     }

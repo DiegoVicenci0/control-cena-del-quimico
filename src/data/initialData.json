@@ -1,44 +1,44 @@
 [
   {
     "mesa_num": 1,
-    "nombre_mesa": "Maggy y Miriam",
+    "nombre_mesa": "MESA 1",
     "capacidad": 12,
     "invitados": [
       {
         "asiento": 1,
-        "nombre": "Ramirez Valenzuela Paola",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "LOPEZ GONZALEZ MIRIAM YAMILA",
+        "pago_monto": 4950.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 2,
-        "nombre": "Salazar Garcia Juan Alberto",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "VACA LÓPEZ ANAHELI MARGARITA",
+        "pago_monto": 1800.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 3,
-        "nombre": "Plasencia Figueroa Grettel Anahis",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "CORONA CHAVEZ CHRISTIAN",
+        "pago_monto": 950.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 4,
-        "nombre": "Naum Emir Farías Serratos",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "JAZMIN ESPINOZA",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 5,
-        "nombre": "Velasco Guzman Perla Sofía",
+        "nombre": "RAMIREZ VALENZUELA PAOLA",
         "pago_monto": 0.0,
         "pago_estado": "pendiente",
         "nota": null,
@@ -46,7 +46,7 @@
       },
       {
         "asiento": 6,
-        "nombre": "Contreras Zamora Frida Carolina",
+        "nombre": "SALAZAR GARCIA JUAN ALBERTO",
         "pago_monto": 0.0,
         "pago_estado": "pendiente",
         "nota": null,
@@ -54,7 +54,7 @@
       },
       {
         "asiento": 7,
-        "nombre": "Solórzano Carrasco Maya Sarahí",
+        "nombre": "PLASENCIA FIGUEROA GRETTEL ANAHIS",
         "pago_monto": 0.0,
         "pago_estado": "pendiente",
         "nota": null,
@@ -62,7 +62,7 @@
       },
       {
         "asiento": 8,
-        "nombre": "Torres Estrada Axel Sebastián",
+        "nombre": "NAUM EMIR FARÍAS SERRATOS",
         "pago_monto": 0.0,
         "pago_estado": "pendiente",
         "nota": null,
@@ -70,31 +70,31 @@
       },
       {
         "asiento": 9,
-        "nombre": "Corona Chavez Christian",
-        "pago_monto": 950.0,
-        "pago_estado": "pagado",
+        "nombre": "VELASCO GUZMAN PERLA SOFÍA",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 10,
-        "nombre": "Lopez Gonzalez Miriam Yamila",
-        "pago_monto": 4950.0,
-        "pago_estado": "pagado",
+        "nombre": "CONTRERAS ZAMORA FRIDA CAROLINA",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 11,
-        "nombre": "Vaca López Anaheli Margarita",
-        "pago_monto": 1800.0,
-        "pago_estado": "pagado",
+        "nombre": "SOLÓRZANO CARRASCO MAYA SARAHÍ",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 12,
-        "nombre": "RICARDO GARCIA (PRESI)",
+        "nombre": "TORRES ESTRADA AXEL SEBASTIÁN",
         "pago_monto": 0.0,
         "pago_estado": "pendiente",
         "nota": null,
@@ -104,12 +104,12 @@
   },
   {
     "mesa_num": 2,
-    "nombre_mesa": "Alonso Aguilar",
+    "nombre_mesa": "MESA 2",
     "capacidad": 12,
     "invitados": [
       {
         "asiento": 1,
-        "nombre": "Aguilar Ceballos Alonso Yael",
+        "nombre": "AGUILAR CEBALLOS ALONSO YAEL",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
         "nota": null,
@@ -117,7 +117,7 @@
       },
       {
         "asiento": 2,
-        "nombre": "Flores Mora Karen Paulette",
+        "nombre": "FLORES MORA KAREN PAULETTE",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
         "nota": null,
@@ -125,7 +125,7 @@
       },
       {
         "asiento": 3,
-        "nombre": "Cazarez Mendoza Michelle",
+        "nombre": "CAZAREZ MENDOZA MICHELLE",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
         "nota": null,
@@ -133,7 +133,7 @@
       },
       {
         "asiento": 4,
-        "nombre": "Gutierrez Cardenas Karol Dalila",
+        "nombre": "GUTIERREZ CARDENAS KAROL DALILA",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
         "nota": null,
@@ -141,7 +141,7 @@
       },
       {
         "asiento": 5,
-        "nombre": "Martín Perez Ibarra",
+        "nombre": "MARTÍN PEREZ IBARRA",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
         "nota": null,
@@ -149,7 +149,7 @@
       },
       {
         "asiento": 6,
-        "nombre": "Fernando Joel Cruz Briones",
+        "nombre": "FERNANDO JOEL CRUZ BRIONES",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
         "nota": null,
@@ -157,7 +157,7 @@
       },
       {
         "asiento": 7,
-        "nombre": "Cox Parales Keyla Aisha",
+        "nombre": "COX PARALES KEYLA AISHA",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
         "nota": null,
@@ -165,7 +165,7 @@
       },
       {
         "asiento": 8,
-        "nombre": "Jimena Lizbeth Silva Barajas",
+        "nombre": "JIMENA LIZBETH SILVA BARAJAS",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
         "nota": null,
@@ -174,32 +174,32 @@
       {
         "asiento": 9,
         "nombre": "GALLEGOS PEREZ ROBERTO EMILIANO",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 10,
         "nombre": "RODRIGUEZ PEREZ FERNANDO",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 11,
         "nombre": "ALVAREZ LARIOS DUMARI",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 12,
         "nombre": "GRANA VIRGEN ROSARIO MONSERRAT",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": "Vegetariana",
         "asistio": false
       }
@@ -207,52 +207,52 @@
   },
   {
     "mesa_num": 3,
-    "nombre_mesa": "Leislani",
+    "nombre_mesa": "MESA 3",
     "capacidad": 10,
     "invitados": [
       {
         "asiento": 1,
-        "nombre": "Muñoz Marín Daniela Yatziry",
+        "nombre": "HERNÁNDEZ YÁÑEZ MELANIE MAIRYM",
+        "pago_monto": 2000.0,
+        "pago_estado": "pagado",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 2,
+        "nombre": "TAPIA GOMEZ ALONDRA GUADALUPE",
+        "pago_monto": 1500.0,
+        "pago_estado": "pagado",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 3,
+        "nombre": "NARANJO VALDEZ JOSE MANUEL",
+        "pago_monto": 200.0,
+        "pago_estado": "abono",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 4,
+        "nombre": "MUÑOZ MARÍN DANIELA YATZIRY",
         "pago_monto": 0.0,
         "pago_estado": "premio",
         "nota": "Premio",
         "asistio": false
       },
       {
-        "asiento": 2,
-        "nombre": "Cardenas Diaz Leislani Yamilet",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
-        "nota": null,
-        "asistio": false
-      },
-      {
-        "asiento": 3,
-        "nombre": "Valle Serratos Ana Sulem",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
-        "nota": null,
-        "asistio": false
-      },
-      {
-        "asiento": 4,
-        "nombre": "Rodríguez Ayala Juan Sebastián",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
-        "nota": null,
-        "asistio": false
-      },
-      {
         "asiento": 5,
-        "nombre": "Figueroa Alan Aristeo",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "CARDENAS DIAZ LEISLANI YAMILET",
+        "pago_monto": 1950.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 6,
-        "nombre": "Trujillo Marín Jesús Emmanuel",
+        "nombre": "VALLE SERRATOS ANA SULEM",
         "pago_monto": 0.0,
         "pago_estado": "pendiente",
         "nota": null,
@@ -260,7 +260,7 @@
       },
       {
         "asiento": 7,
-        "nombre": "Martínez Pimienta Ángel Javier",
+        "nombre": "RODRÍGUEZ AYALA JUAN SEBASTIÁN",
         "pago_monto": 0.0,
         "pago_estado": "pendiente",
         "nota": null,
@@ -268,7 +268,7 @@
       },
       {
         "asiento": 8,
-        "nombre": "Hernández Yáñez Melanie Mairym",
+        "nombre": "FIGUEROA ALAN ARISTEO",
         "pago_monto": 0.0,
         "pago_estado": "pendiente",
         "nota": null,
@@ -276,7 +276,7 @@
       },
       {
         "asiento": 9,
-        "nombre": "Naranjo Valdez Jose Manuel",
+        "nombre": "TRUJILLO MARÍN JESÚS EMMANUEL",
         "pago_monto": 0.0,
         "pago_estado": "pendiente",
         "nota": null,
@@ -284,7 +284,7 @@
       },
       {
         "asiento": 10,
-        "nombre": "Tapia Gomez Alondra Guadalupe",
+        "nombre": "MARTÍNEZ PIMIENTA ÁNGEL JAVIER",
         "pago_monto": 0.0,
         "pago_estado": "pendiente",
         "nota": null,
@@ -294,13 +294,110 @@
   },
   {
     "mesa_num": 4,
-    "nombre_mesa": "SIN ASIGNAR",
+    "nombre_mesa": "MESA 4",
     "capacidad": 12,
-    "invitados": []
+    "invitados": [
+      {
+        "asiento": 1,
+        "nombre": "MIGUEL ÁNGEL CANTOR GONZÁLEZ",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 2,
+        "nombre": "KEVIN AZAEL VÁZQUEZ GAYTÁN",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 3,
+        "nombre": "NAOMI ARISTANI MARAVELES CATAÑO",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 4,
+        "nombre": "VALERIA VELAZQUEZ CERVANTES",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 5,
+        "nombre": "JUAN CARLOS DE LA MORA CHÁVEZ",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 6,
+        "nombre": "CECELIK GUADALUPE MORA CANTERO",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 7,
+        "nombre": "JOSÉ GUADALUPE RODRIGUEZ PIZANO",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 8,
+        "nombre": "YADIRA AGUILAR GUTIERREZ",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 9,
+        "nombre": "FERNANDO HERNÁNDEZ",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 10,
+        "nombre": "UKOK SEBASTIAN MUNGUÍA BARAJAS",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 11,
+        "nombre": "MARIANA PUENTE CUEVAS",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 12,
+        "nombre": "YAHIR MENDOZA CERNAS",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
+        "nota": null,
+        "asistio": false
+      }
+    ]
   },
   {
     "mesa_num": 5,
-    "nombre_mesa": "7C",
+    "nombre_mesa": "MESA 5",
     "capacidad": 11,
     "invitados": [
       {
@@ -338,8 +435,8 @@
       {
         "asiento": 5,
         "nombre": "VAZQUEZ GILDO KAROL",
-        "pago_monto": 550.0,
-        "pago_estado": "abono",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
@@ -362,15 +459,15 @@
       {
         "asiento": 8,
         "nombre": "VALENCIA AVILA KARLA YATZIRY",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 9,
         "nombre": "OMAR MARTINEZ",
-        "pago_monto": 250.0,
+        "pago_monto": 450.0,
         "pago_estado": "abono",
         "nota": null,
         "asistio": false
@@ -378,8 +475,8 @@
       {
         "asiento": 10,
         "nombre": "VALDOVINOS ALCANTAR RODOLFO",
-        "pago_monto": 200.0,
-        "pago_estado": "abono",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
@@ -395,68 +492,100 @@
   },
   {
     "mesa_num": 6,
-    "nombre_mesa": "EMMA",
+    "nombre_mesa": "MESA 6",
     "capacidad": 12,
     "invitados": [
       {
         "asiento": 1,
-        "nombre": "Cecilia Nataly Cruz Bejarano",
-        "pago_monto": 150.0,
-        "pago_estado": "abono",
+        "nombre": "CECILIA NATALY CRUZ BEJARANO",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 2,
-        "nombre": "Ximena Isabel Santa Ana Meléndez",
-        "pago_monto": 150.0,
-        "pago_estado": "abono",
+        "nombre": "XIMENA ISABEL SANTA ANA MELÉNDEZ",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 3,
-        "nombre": "Alejandra Zúñiga Huerta",
-        "pago_monto": 150.0,
-        "pago_estado": "abono",
+        "nombre": "ALEJANDRA ZÚÑIGA HUERTA",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 4,
-        "nombre": "Emiliano González Romero",
-        "pago_monto": 150.0,
-        "pago_estado": "abono",
+        "nombre": "EMILIANO GONZÁLEZ ROMERO",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 5,
-        "nombre": "Dana Paola Pérez Gutiérrez",
-        "pago_monto": 150.0,
-        "pago_estado": "abono",
+        "nombre": "DANA PAOLA PÉREZ GUTIÉRREZ",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 6,
-        "nombre": "Emma Cecilia Magaña Rincón",
-        "pago_monto": 150.0,
-        "pago_estado": "abono",
+        "nombre": "EMMA CECILIA MAGAÑA RINCÓN",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 7,
-        "nombre": "Bruno Alejandro Navarro Córdova",
-        "pago_monto": 150.0,
-        "pago_estado": "abono",
+        "nombre": "BRUNO ALEJANDRO NAVARRO CÓRDOVA",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 8,
-        "nombre": "JAZMIN ESPINOZA (PRESI)",
+        "nombre": "OMAR GOMEZ",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 9,
+        "nombre": "MARELY JAZOXARA",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 10,
+        "nombre": "AMIGA 1",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 11,
+        "nombre": "AMIGA 2",
+        "pago_monto": 0.0,
+        "pago_estado": "pendiente",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 12,
+        "nombre": "DIEGO V",
         "pago_monto": 0.0,
         "pago_estado": "pendiente",
         "nota": null,
@@ -466,12 +595,12 @@
   },
   {
     "mesa_num": 7,
-    "nombre_mesa": "MESA 1 DANIELA",
+    "nombre_mesa": "MESA 7",
     "capacidad": 10,
     "invitados": [
       {
         "asiento": 1,
-        "nombre": "MARCOS DE JESUS JALOMO",
+        "nombre": "MARIA FERNANDA MARTINEZ",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
         "nota": null,
@@ -479,7 +608,7 @@
       },
       {
         "asiento": 2,
-        "nombre": "MICHELL PUENTE",
+        "nombre": "MARCOS DE JESUS JALOMO",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
         "nota": null,
@@ -487,7 +616,7 @@
       },
       {
         "asiento": 3,
-        "nombre": "DYLAN LARIOS",
+        "nombre": "MICHELL PUENTE",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
         "nota": null,
@@ -495,41 +624,41 @@
       },
       {
         "asiento": 4,
-        "nombre": "MARIA FERNANDA MARTINEZ",
-        "pago_monto": 500.0,
-        "pago_estado": "abono",
+        "nombre": "EFRAIN GRANADOS",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 5,
-        "nombre": "RAFAEL SILVA",
-        "pago_monto": 500.0,
-        "pago_estado": "abono",
+        "nombre": "DYLAN LARIOS",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 6,
-        "nombre": "EFRAIN GRANADOS",
-        "pago_monto": 400.0,
-        "pago_estado": "abono",
+        "nombre": "MARIANA RODRIGUEZ ALCANTAR",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 7,
-        "nombre": "MARIANA RODRIGUEZ ALCANTAR",
-        "pago_monto": 300.0,
-        "pago_estado": "abono",
+        "nombre": "RAFAEL SILVA",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 8,
         "nombre": "JUAN GARCIA",
-        "pago_monto": 150.0,
-        "pago_estado": "abono",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
@@ -553,7 +682,7 @@
   },
   {
     "mesa_num": 8,
-    "nombre_mesa": "MESA 2 DANIELA",
+    "nombre_mesa": "MESA 8",
     "capacidad": 10,
     "invitados": [
       {
@@ -566,7 +695,7 @@
       },
       {
         "asiento": 2,
-        "nombre": "FERNANDA MUÑOZ",
+        "nombre": "VANIA CAMARILLO",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
         "nota": null,
@@ -574,7 +703,7 @@
       },
       {
         "asiento": 3,
-        "nombre": "ADRIANA DIAZ",
+        "nombre": "DIANA MENDOZA",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
         "nota": null,
@@ -582,7 +711,7 @@
       },
       {
         "asiento": 4,
-        "nombre": "ARISTIDES RAMIREZ",
+        "nombre": "FERNANDA MUÑOZ",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
         "nota": null,
@@ -590,41 +719,120 @@
       },
       {
         "asiento": 5,
-        "nombre": "VALERIA SALAZAR",
-        "pago_monto": 500.0,
-        "pago_estado": "abono",
-        "nota": null,
-        "asistio": false
-      },
-      {
-        "asiento": 6,
-        "nombre": "DIANA MENDOZA",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "nombre": "ADRIANA DIAZ",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 7,
-        "nombre": "FERNANDO PEREZ",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "nombre": "GUADALUPE CAMARENA",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 8,
-        "nombre": "VANIA CAMARILLO",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "nombre": "SANTIAGO LANZ",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 9,
-        "nombre": "SERGIO SANTOS",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "nombre": "VALERIA SALAZAR",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 10,
+        "nombre": "FERNANDO PEREZ",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
+        "nota": null,
+        "asistio": false
+      }
+    ]
+  },
+  {
+    "mesa_num": 9,
+    "nombre_mesa": "MESA 9",
+    "capacidad": 10,
+    "invitados": [
+      {
+        "asiento": 1,
+        "nombre": "SHANI ZAMORA",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 2,
+        "nombre": "ANGEL GIL",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 3,
+        "nombre": "SARAH SANTOS",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 4,
+        "nombre": "DAVID RICARDO",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 5,
+        "nombre": "MIGUEL LARIOS",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 6,
+        "nombre": "AMERICA JIMENEZ",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 7,
+        "nombre": "EDWIN",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 8,
+        "nombre": "ARISTIDES RAMIREZ",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 9,
+        "nombre": "CARLA CHAVARRIA",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
@@ -639,13 +847,13 @@
     ]
   },
   {
-    "mesa_num": 9,
-    "nombre_mesa": "MESA 3 DANIELA",
-    "capacidad": 10,
+    "mesa_num": 10,
+    "nombre_mesa": "MESA 10",
+    "capacidad": 12,
     "invitados": [
       {
         "asiento": 1,
-        "nombre": "DAVID RICARDO",
+        "nombre": "KAREN DEOJUAN",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
         "nota": null,
@@ -653,160 +861,89 @@
       },
       {
         "asiento": 2,
-        "nombre": "MIGUEL LARIOS",
-        "pago_monto": 600.0,
-        "pago_estado": "abono",
-        "nota": null,
-        "asistio": false
-      },
-      {
-        "asiento": 3,
-        "nombre": "ANGEL GIL",
-        "pago_monto": 500.0,
-        "pago_estado": "abono",
-        "nota": null,
-        "asistio": false
-      },
-      {
-        "asiento": 4,
-        "nombre": "SARAH SANTOS",
-        "pago_monto": 500.0,
-        "pago_estado": "abono",
-        "nota": null,
-        "asistio": false
-      },
-      {
-        "asiento": 5,
-        "nombre": "AMERICA JIMENEZ",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
-        "nota": null,
-        "asistio": false
-      },
-      {
-        "asiento": 6,
-        "nombre": "EDWIN",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
-        "nota": null,
-        "asistio": false
-      },
-      {
-        "asiento": 7,
-        "nombre": "SHANI ZAMORA",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
-        "nota": null,
-        "asistio": false
-      },
-      {
-        "asiento": 8,
-        "nombre": "GUADALUPE CAMARENA",
-        "pago_monto": 400.0,
-        "pago_estado": "abono",
-        "nota": null,
-        "asistio": false
-      },
-      {
-        "asiento": 9,
-        "nombre": "ZOE KIMERA",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
-        "nota": null,
-        "asistio": false
-      },
-      {
-        "asiento": 10,
-        "nombre": "SANTIAGO LANZ",
-        "pago_monto": 400.0,
-        "pago_estado": "abono",
-        "nota": null,
-        "asistio": false
-      }
-    ]
-  },
-  {
-    "mesa_num": 10,
-    "nombre_mesa": "MESA 4 DANIELA",
-    "capacidad": 10,
-    "invitados": [
-      {
-        "asiento": 1,
-        "nombre": "KAREN DEOJUAN",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
-        "nota": null,
-        "asistio": false
-      },
-      {
-        "asiento": 2,
         "nombre": "EDUARDO VELA",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 3,
         "nombre": "YESANI",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 4,
         "nombre": "MARIA LUNA",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 5,
         "nombre": "DANIELA APARICIO",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 6,
         "nombre": "PAOLA BARCEINAS",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 7,
         "nombre": "JOSE LUIS ALVAREZ",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 8,
         "nombre": "CECI FLORES",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 9,
-        "nombre": "SAUL VILLALVAZO",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "nombre": "ZOE KIMERA",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 10,
         "nombre": "ANGEL SANTANA",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 11,
+        "nombre": "SAUL VILLALVAZO",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 12,
+        "nombre": "ALEXA QFB",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       }
@@ -814,102 +951,102 @@
   },
   {
     "mesa_num": 11,
-    "nombre_mesa": "ALEJANDRA ORDAZ (PRESI)",
+    "nombre_mesa": "MESA 11",
     "capacidad": 12,
     "invitados": [
       {
         "asiento": 1,
-        "nombre": "ALEJANDRA ORDAZ",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "NAOMI",
+        "pago_monto": 600.0,
+        "pago_estado": "abono",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 2,
-        "nombre": "SERGIO",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "ALEJANDRA ORDAZ",
+        "pago_monto": 450.0,
+        "pago_estado": "abono",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 3,
-        "nombre": "DANIEL",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "SERGIO",
+        "pago_monto": 450.0,
+        "pago_estado": "abono",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 4,
-        "nombre": "HUGO",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "DANIEL",
+        "pago_monto": 450.0,
+        "pago_estado": "abono",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 5,
-        "nombre": "GERA",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "HUGO",
+        "pago_monto": 450.0,
+        "pago_estado": "abono",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 6,
-        "nombre": "JUAN PABLO",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "GERA",
+        "pago_monto": 450.0,
+        "pago_estado": "abono",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 7,
-        "nombre": "CRUZ",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "JUAN PABLO",
+        "pago_monto": 450.0,
+        "pago_estado": "abono",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 8,
-        "nombre": "EMMANUEL TAPIA",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "CRUZ",
+        "pago_monto": 450.0,
+        "pago_estado": "abono",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 9,
-        "nombre": "MEMO",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "EMMANUEL TAPIA",
+        "pago_monto": 450.0,
+        "pago_estado": "abono",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 10,
-        "nombre": "ALFONSO",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "MEMO",
+        "pago_monto": 450.0,
+        "pago_estado": "abono",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 11,
-        "nombre": "ANA",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "ALFONSO",
+        "pago_monto": 450.0,
+        "pago_estado": "abono",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 12,
-        "nombre": "NAOMI",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "ANA",
+        "pago_monto": 450.0,
+        "pago_estado": "abono",
         "nota": null,
         "asistio": false
       }
@@ -917,94 +1054,86 @@
   },
   {
     "mesa_num": 12,
-    "nombre_mesa": "ANAHI GARCIA VAZQUEZ (PRESI)",
+    "nombre_mesa": "MESA 12",
     "capacidad": 10,
     "invitados": [
       {
         "asiento": 1,
         "nombre": "ANAID GARCIA VAZQUEZ",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 2,
         "nombre": "DIANA LIZBETH LOPEZ AVALOS",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 3,
         "nombre": "MARIA FERNANDA CASTELLANOS PEREZ",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 4,
         "nombre": "AURA BELEN SUGIAS ELISALDE",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 5,
         "nombre": "FERNANDA LARIOS LOZOYA",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 6,
         "nombre": "ENRIQUE SALVADOS",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 7,
-        "nombre": "NAVARRO GARCIA",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "RICARDO GARCIA",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 8,
         "nombre": "ADRIAN DIAZ",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 9,
         "nombre": "ADAI MORALES",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
-        "asistio": false
-      },
-      {
-        "asiento": 10,
-        "nombre": "PENDIENTE NOMBRE",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
-        "nota": "Pendiente nombre",
         "asistio": false
       }
     ]
   },
   {
     "mesa_num": 13,
-    "nombre_mesa": "MESA 13 DIRECCION",
+    "nombre_mesa": "MESA 13",
     "capacidad": 12,
     "invitados": [
       {
@@ -1017,7 +1146,7 @@
       },
       {
         "asiento": 2,
-        "nombre": "ELIZABETH (PAREJA OSCAR VAZQUEZ)",
+        "nombre": "ELIZABETH",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
         "nota": null,
@@ -1033,38 +1162,22 @@
       },
       {
         "asiento": 4,
-        "nombre": "NUÑEZ XIMENA",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "nombre": "LOPEZ RODRIGUEZ ISAAC",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 5,
-        "nombre": "LOPEZ RODRIGUEZ ISAAC",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
+        "nombre": "MORALES AMERICA",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 6,
-        "nombre": "MORALES AMERICA",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
-        "nota": null,
-        "asistio": false
-      },
-      {
-        "asiento": 7,
-        "nombre": "YADIRA PEREZ",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
-        "nota": null,
-        "asistio": false
-      },
-      {
-        "asiento": 8,
         "nombre": "ROBERTO MUÑIZ",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
@@ -1072,7 +1185,7 @@
         "asistio": false
       },
       {
-        "asiento": 9,
+        "asiento": 7,
         "nombre": "SILVIA CEBALLOS",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
@@ -1080,24 +1193,40 @@
         "asistio": false
       },
       {
+        "asiento": 8,
+        "nombre": "DULCE CRUZ",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 9,
+        "nombre": "HARLEY POLANCO",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
+        "nota": null,
+        "asistio": false
+      },
+      {
         "asiento": 10,
-        "nombre": "Ricardo Sancliment (PRESI)",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "NUÑEZ XIMENA",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 11,
-        "nombre": "DULCE CRUZ (PRESI)",
-        "pago_monto": 0.0,
-        "pago_estado": "pendiente",
+        "nombre": "RICARDO SANCLIMENT",
+        "pago_monto": 450.0,
+        "pago_estado": "abono",
         "nota": null,
         "asistio": false
       },
       {
         "asiento": 12,
-        "nombre": "HARLEY",
+        "nombre": "YADIRA PEREZ",
         "pago_monto": 0.0,
         "pago_estado": "pendiente",
         "nota": null,
@@ -1144,22 +1273,6 @@
       },
       {
         "asiento": 5,
-        "nombre": "LOPEZ JIMENEZ VALERIA",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
-        "nota": null,
-        "asistio": false
-      },
-      {
-        "asiento": 6,
-        "nombre": "MAÑAGA VELASCO GRECIA GUADALUPE",
-        "pago_monto": 450.0,
-        "pago_estado": "abono",
-        "nota": null,
-        "asistio": false
-      },
-      {
-        "asiento": 7,
         "nombre": "GUILLERMO VELAZCO",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
@@ -1167,7 +1280,7 @@
         "asistio": false
       },
       {
-        "asiento": 8,
+        "asiento": 6,
         "nombre": "CAMILA GALVAN",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
@@ -1175,7 +1288,7 @@
         "asistio": false
       },
       {
-        "asiento": 9,
+        "asiento": 7,
         "nombre": "EMILIANO LEON",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
@@ -1183,7 +1296,7 @@
         "asistio": false
       },
       {
-        "asiento": 10,
+        "asiento": 8,
         "nombre": "OSWALDO BARAJAS",
         "pago_monto": 700.0,
         "pago_estado": "pagado",
@@ -1191,10 +1304,26 @@
         "asistio": false
       },
       {
+        "asiento": 9,
+        "nombre": "LOPEZ JIMENEZ VALERIA",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
+        "nota": null,
+        "asistio": false
+      },
+      {
+        "asiento": 10,
+        "nombre": "JULIO AARON MARTINEZ SAHAGUN",
+        "pago_monto": 450.0,
+        "pago_estado": "abono",
+        "nota": null,
+        "asistio": false
+      },
+      {
         "asiento": 11,
         "nombre": "FLORES MUNGUIA MARIA JOSE",
-        "pago_monto": 150.0,
-        "pago_estado": "abono",
+        "pago_monto": 700.0,
+        "pago_estado": "pagado",
         "nota": null,
         "asistio": false
       },
@@ -1207,11 +1336,5 @@
         "asistio": false
       }
     ]
-  },
-  {
-    "mesa_num": 15,
-    "nombre_mesa": "SIN ASIGNAR",
-    "capacidad": 12,
-    "invitados": []
   }
 ]

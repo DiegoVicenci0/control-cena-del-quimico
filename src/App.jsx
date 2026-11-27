@@ -9,7 +9,7 @@ import AcomodoView from './components/AcomodoView';
 import QrCardsView from './components/QrCardsView';
 import SyncSettingsView from './components/SyncSettingsView';
 
-const LS_DATA_KEY = 'cena_quimico_mesas_v2';
+const LS_DATA_KEY = 'cena_quimico_mesas_v3';
 const LS_MOVS_KEY = 'cena_quimico_movimientos_v1';
 const LS_EVENT_KEY = 'cena_quimico_event_v1';
 

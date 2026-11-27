@@ -12,9 +12,9 @@ import {
   Award,
 } from 'lucide-react';
 
-const LS_LAYOUT_KEY = 'cena_quimico_plano_v1';
+const LS_LAYOUT_KEY = 'cena_quimico_plano_v2';
 
-// 15 physical slots in the U-shaped corridor (Pinacoteca Universitaria)
+// 14 physical slots in the U-shaped corridor (Pinacoteca Universitaria)
 const SLOTS = [
   { id: 'L0', zone: 'left', idx: 0, x: 112, y: 112 },
   { id: 'L1', zone: 'left', idx: 1, x: 112, y: 214 },
@@ -30,43 +30,40 @@ const SLOTS = [
   { id: 'R1', zone: 'right', idx: 1, x: 808, y: 418 },
   { id: 'R2', zone: 'right', idx: 2, x: 808, y: 316 },
   { id: 'R3', zone: 'right', idx: 3, x: 808, y: 214 },
-  { id: 'R4', zone: 'right', idx: 4, x: 808, y: 112 },
 ];
 
 const OPTIMAL_ASSIGNMENT = {
-  L0: 1,  // Maggy y Miriam (lejos de Emma)
-  L1: 11, // Alejandra Ordaz (Presi)
-  L2: 12, // Anahí García (Presi)
-  L3: 2,  // Alonso Aguilar (junto a 14)
-  L4: 14, // Dr. Armando (junto a 2)
-  B0: 3,  // Leislani
-  B1: 13, // Dirección (cerca de 5)
-  B2: 5,  // 7C (centro frente, entre 13 y 6)
-  B3: 6,  // Emma (cerca de 5, lejos de 1)
-  B4: 4,  // SIN ASIGNAR
-  R0: 7,  // Daniela 1
-  R1: 8,  // Daniela 2
-  R2: 9,  // Daniela 3
-  R3: 10, // Daniela 4
-  R4: 15, // SIN ASIGNAR
+  L0: 1,  // Mesa 1 (lejos de Mesa 6)
+  L1: 11, // Mesa 11
+  L2: 12, // Mesa 12
+  L3: 2,  // Mesa 2 (junto a Mesa 14)
+  L4: 14, // Dr. Armando (junto a Mesa 2)
+  B0: 3,  // Mesa 3
+  B1: 13, // Mesa 13 (cerca de Mesa 5)
+  B2: 5,  // Mesa 5 (centro frente, entre 13 y 6)
+  B3: 6,  // Mesa 6 (cerca de Mesa 5, lejos de Mesa 1)
+  B4: 4,  // Mesa 4 (12/12)
+  R0: 7,  // Mesa 7 (Daniela 1)
+  R1: 8,  // Mesa 8 (Daniela 2)
+  R2: 9,  // Mesa 9 (Daniela 3)
+  R3: 10, // Mesa 10 (Daniela 4)
 };
 
 const TABLE_META = {
-  1: { group: 'm1', rule: 'Preferencia: lejos de Mesa 6 (Emma)' },
+  1: { group: 'm1', rule: 'Preferencia: lejos de Mesa 6' },
   2: { group: 'alonso', rule: 'Junto a Mesa 14 (Dr. Armando)' },
   3: { group: 'other', rule: 'Sin restricción específica' },
-  4: { group: 'unassigned', rule: 'Mesa sin asignar (reserva)' },
+  4: { group: 'other', rule: 'Sin restricción específica' },
   5: { group: '7c', rule: 'Zona 7C al frente · Cerca de Mesa 13 y Mesa 6' },
   6: { group: '7c', rule: 'Zona 7C al frente · Cerca de Mesa 5 y lejos de Mesa 1' },
   7: { group: 'daniela', rule: 'Bloque Daniela · Contigua a Mesas 8, 9 y 10' },
   8: { group: 'daniela', rule: 'Bloque Daniela · Contigua a Mesas 7, 9 y 10' },
   9: { group: 'daniela', rule: 'Bloque Daniela · Contigua a Mesas 7, 8 y 10' },
   10: { group: 'daniela', rule: 'Bloque Daniela · Contigua a Mesas 7, 8 y 9' },
-  11: { group: 'other', rule: 'Presi · Indiferente su cercanía' },
-  12: { group: 'other', rule: 'Presi · Indiferente su cercanía' },
-  13: { group: '7c', rule: 'Zona 7C al frente · Cerca de Mesa 5 (7C)' },
-  14: { group: 'alonso', rule: 'Junto a Mesa 2 (Alonso Aguilar)' },
-  15: { group: 'unassigned', rule: 'Mesa sin asignar (reserva)' },
+  11: { group: 'other', rule: 'Indiferente su cercanía' },
+  12: { group: 'other', rule: 'Indiferente su cercanía' },
+  13: { group: '7c', rule: 'Zona 7C al frente · Cerca de Mesa 5' },
+  14: { group: 'alonso', rule: 'Junto a Mesa 2' },
 };
 
 const GROUP_COLORS = {
@@ -83,7 +80,7 @@ function loadSavedLayout() {
     const raw = window.localStorage.getItem(LS_LAYOUT_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (parsed && Object.keys(parsed).length === 15) return parsed;
+      if (parsed && Object.keys(parsed).length === SLOTS.length) return parsed;
     }
   } catch {
     // ignore
@@ -122,9 +119,9 @@ export default function AcomodoView({ mesas, onOpenMesa }) {
   const mesaByNum = useMemo(() => {
     const map = {};
     for (const m of mesas) map[m.mesa_num] = m;
-    for (let i = 1; i <= 15; i += 1) {
+    for (let i = 1; i <= 14; i += 1) {
       if (!map[i]) {
-        map[i] = { mesa_num: i, nombre_mesa: 'SIN ASIGNAR', capacidad: 12, invitados: [] };
+        map[i] = { mesa_num: i, nombre_mesa: `MESA ${i}`, capacidad: 12, invitados: [] };
       }
     }
     return map;
@@ -170,8 +167,9 @@ export default function AcomodoView({ mesas, onOpenMesa }) {
     let veg = 0;
     let premios = 0;
     let pendientes = 0;
-    for (let i = 1; i <= 15; i += 1) {
+    for (let i = 1; i <= 14; i += 1) {
       const m = mesaByNum[i];
+      if (!m) continue;
       const isUnassigned =
         !m.invitados.length || m.nombre_mesa.toUpperCase().includes('SIN ASIGNAR');
       if (!isUnassigned) {
@@ -253,7 +251,7 @@ export default function AcomodoView({ mesas, onOpenMesa }) {
             {stats.activas}
             <span style={{ fontSize: '0.85rem', color: 'var(--text-tertiary)', fontWeight: 500 }}>
               {' '}
-              / 15
+              / 14
             </span>
           </div>
         </div>
@@ -315,13 +313,6 @@ export default function AcomodoView({ mesas, onOpenMesa }) {
             >
               <ArrowLeftRight size={15} />
               <span>{swapMode ? 'Intercambiando' : 'Intercambiar'}</span>
-            </button>
-            <button
-              className="btn btn-sm"
-              onClick={() => setShowUnassigned((v) => !v)}
-            >
-              {showUnassigned ? <EyeOff size={15} /> : <Eye size={15} />}
-              <span>{showUnassigned ? 'Ocultar 4 y 15' : 'Ver 4 y 15'}</span>
             </button>
             <button
               className="btn btn-sm"
@@ -592,7 +583,9 @@ export default function AcomodoView({ mesas, onOpenMesa }) {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
             <div>
               <h2 style={{ margin: 0, fontSize: '1.08rem', fontWeight: 700 }}>
-                Mesa {selectedMesa.mesa_num} · {selectedMesa.nombre_mesa}
+                {selectedMesa.nombre_mesa.toUpperCase() === `MESA ${selectedMesa.mesa_num}`
+                  ? `Mesa ${selectedMesa.mesa_num}`
+                  : `Mesa ${selectedMesa.mesa_num} · ${selectedMesa.nombre_mesa}`}
               </h2>
               <p style={{ margin: '3px 0 0', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
                 {selectedSlot?.zone === 'left'
